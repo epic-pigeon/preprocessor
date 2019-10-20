@@ -16,7 +16,7 @@ public class LexerToken {
     }
 
     public String toString() {
-        return rule.getName() + " '" + value.replaceAll("\\r?\\n", "<new line>") + "'";
+        return (rule != null ? rule.getName() : "<unknown rule>") + " '" + value.replaceAll("\\r?\\n", "<new line>") + "'";
     }
 
 }

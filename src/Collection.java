@@ -40,7 +40,16 @@ public class Collection<T> extends ArrayList<T> {
         return join(" ");
     }
     public T findFirst(Function<T, Boolean> fn) {
-        for (T element: this) if (fn.apply(element)) return element;
+        return findCount(0, fn);
+    }
+    public int count(Function<T, Boolean> fn) {
+        int occurrences = 0;
+        for (T element: this) if (fn.apply(element)) occurrences++;
+        return occurrences;
+    }
+    public T findCount(int c, Function<T, Boolean> fn) {
+        int occurrences = 0;
+        for (T element: this) if (fn.apply(element) && c == occurrences++) return element;
         return null;
     }
     public T last() {
@@ -77,5 +86,11 @@ public class Collection<T> extends ArrayList<T> {
             result.put(entry.getKey(), entry.getValue());
         }
         return result;
+    }
+    public Collection<T> insert(int pos, List<T> values) {
+        Collection<T> res = slice(0, pos - 1);
+        res.addAll(values);
+        res.addAll(slice(pos));
+        return res;
     }
 }

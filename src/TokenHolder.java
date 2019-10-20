@@ -1,4 +1,5 @@
 import java.util.Iterator;
+import java.util.List;
 
 public class TokenHolder {
     private Collection<LexerToken> tokens;
@@ -37,6 +38,18 @@ public class TokenHolder {
 
     public LexerToken lookUp() {
         return lookUp(0);
+    }
+
+    public void appendOnPointer(List<LexerToken> tokenList) {
+        tokens = tokens.insert(position, tokenList);
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
     }
 
     public LexerToken lookUp(int i) {
